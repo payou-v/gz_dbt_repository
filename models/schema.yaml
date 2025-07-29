@@ -48,5 +48,5 @@ sources:
           - name: ship_cost
             description: costs of ship
         tests:
-          column_name: orders_id
-
+          - unique:
+            column_name: orders_id
