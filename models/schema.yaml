@@ -5,11 +5,15 @@ version: 2
 sources:
   - name: raw
     schema: gz_raw_data
-   
     tables:
       - name: sales
         identifier: raw_gz_sales
         description: sales of Greenweez
+        freshness:
+            warn_after:
+              count: 10
+              period: day
+        loaded_at_field: CAST(date_date AS timestamp)
         columns:
           - name: date_date
             description: purchase_date
@@ -32,11 +36,6 @@ sources:
         tests:
           - unique:
               column_name: "(orders_id || '-' || pdt_id)"
-        freshness:
-          warn_after:
-            count: 10
-            period: day
-        loaded_at_field: date_date
           
       - name: product
         identifier: raw_gz_product
